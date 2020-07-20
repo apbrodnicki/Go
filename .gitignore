@@ -1,0 +1,4 @@
+# exclude all env files
+venv/
+.git/
+.idea/
