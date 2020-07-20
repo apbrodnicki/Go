@@ -11,7 +11,7 @@ pygame.transform.scale(black_stone, (stone_size_x, stone_size_y))
 white_stone = pygame.image.load('assets/white_stone.png')
 pygame.transform.scale(white_stone, (stone_size_x, stone_size_y))
 
-res_x = 900
+res_x = 600
 res_y = 600
 
 screen = pygame.display.set_mode((res_x, res_y))
@@ -30,8 +30,19 @@ def menu_func():
     return 0
 
 
+board_dimension = 9
+block_size = (res_y * 0.9) / board_dimension
+
+def drawGrid():
+    for x in range(board_dimension - 1):
+        for y in range(board_dimension - 1):
+            rect = pygame.Rect(x*block_size + res_x*0.1, y*block_size + res_y*0.1,
+                               block_size, block_size)
+            pygame.draw.rect(screen, (237, 182, 102), rect, 1)
+
+
 def game_func():
-    return 0
+    drawGrid()
 
 
 def end_func():
@@ -39,7 +50,7 @@ def end_func():
 
 
 #
-game_state = 0
+game_state = 1
 
 switch = {
     0: menu_func,
@@ -51,6 +62,8 @@ running = True
 
 while running:
     screen.fill((52, 182, 229))
+
+    game_func()
 
     for event in pygame.event.get():
         # check if the event is the X button
